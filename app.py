@@ -75,7 +75,14 @@ else:
 
 
 # print loan status
-input=np.array([[gender, married, education, self_employed, income, coincome, loan_amount, loan_term, credit_history, property]])
-model =joblib.load('model.pkl')
-loan_status=model.predict(input)
-st.write(loan_status[0])
+
+if st.button('Predict'):
+    input=np.array([[gender, married, education, self_employed, income, coincome, loan_amount, loan_term, credit_history, property]])
+    model =joblib.load('model.pkl')
+    loan_status=model.predict(input)
+
+    if loan_status[0]==0:
+        st.write('Sorry, You are not eligible.')
+    else:
+        st.write('Congratulations!! You are eligible.')
+        
